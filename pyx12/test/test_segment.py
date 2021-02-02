@@ -41,7 +41,7 @@ class Identity(unittest.TestCase):
 
     def test_identity2(self):
         seg_str = 'ISA*00*          *00*          *ZZ*ZZ000          *'
-        seg_str += 'ZZ*ZZ001          *030828*1128*U*00401*000010121*0*T*:\n'
+        seg_str += 'ZZ*ZZ001          *030828*1128*U*00401*000010121*0*T*:'
         seg = pyx12.segment.Segment(seg_str, '~', '*', ':')
         self.assertEqual(seg.__repr__(), seg_str + '~')
 

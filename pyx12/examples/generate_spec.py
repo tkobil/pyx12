@@ -59,8 +59,8 @@ def save_mapping(rows, json_file):
             s.sort(key=lambda item: item['Ordinal'])
             for item in s:
                 fitem = json.dumps(item)
-                fd.write('\n\t{item},'.format(item=fitem))
-            fd.write('\n],\n')
+                fd.write('\t{item},'.format(item=fitem))
+            fd.write('],')
         fd.write('}')
 
 def make_dict(data):

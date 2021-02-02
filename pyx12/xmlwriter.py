@@ -63,7 +63,7 @@ class XMLWriter(object):
         self.out = out
         self.stack = []
         self.indent = indent
-        self._write('<?xml version="1.0" encoding="%s"?>\n' % encoding)
+        self._write('<?xml version="1.0" encoding="%s"?>' % encoding)
 
     def doctype(self, root, pubid, sysid):
         """
@@ -71,10 +71,10 @@ class XMLWriter(object):
         """
         if pubid is None:
             self._write(
-                "<!DOCTYPE %s SYSTEM '%s'>\n" % (root, sysid))
+                "<!DOCTYPE %s SYSTEM '%s'>" % (root, sysid))
         else:
             self._write(
-                "<!DOCTYPE %s PUBLIC '%s' '%s'>\n"
+                "<!DOCTYPE %s PUBLIC '%s' '%s'>"
                 % (root, pubid, sysid))
 
     def push(self, elem, attrs={}):
@@ -85,7 +85,7 @@ class XMLWriter(object):
         self._write("<" + elem)
         for (a, v) in list(attrs.items()):
             self._write(" %s='%s'" % (a, self._escape_attr(v)))
-        self._write(">\n")
+        self._write(">")
         self.stack.append(elem)
 
     def elem(self, elem, content, attrs={}):
@@ -96,7 +96,7 @@ class XMLWriter(object):
         self._write("<" + elem)
         for (a, v) in list(attrs.items()):
             self._write(" %s='%s'" % (a, self._escape_attr(v)))
-        self._write(">%s</%s>\n" % (self._escape_cont(content), elem))
+        self._write(">%s</%s>" % (self._escape_cont(content), elem))
 
     def empty(self, elem, attrs={}):
         """
@@ -106,7 +106,7 @@ class XMLWriter(object):
         self._write("<" + elem)
         for a in list(attrs.items()):
             self._write(" %s='%s'" % a)
-        self.out.write("/>\n")
+        self.out.write("/>")
 
     def pop(self):
         """
@@ -116,7 +116,7 @@ class XMLWriter(object):
             elem = self.stack[-1]
             del self.stack[-1]
             self._indent()
-            self._write("</%s>\n" % elem)
+            self._write("</%s>" % elem)
 
     def __len__(self):
         return len(self.stack)

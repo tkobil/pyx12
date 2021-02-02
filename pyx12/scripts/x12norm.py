@@ -47,7 +47,7 @@ def main():
     logger.addHandler(stdout_hdlr)
     logger.setLevel(logging.INFO)
 
-    eol = '\n' if args.eol else ''
+    eol = '' if args.eol else ''
     for file_in in args.input_files:
         if not os.path.isfile(file_in):
             logger.error('Could not open file "%s"' % (file_in))
@@ -70,7 +70,7 @@ def main():
             #    if 'SEG1' in err_codes:
             fd_out.write(seg_data.format() + eol)
         if eol == '':
-            fd_out.write('\n')
+            fd_out.write('')
 
         fd_out.seek(0)
         if args.outputfile:

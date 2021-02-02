@@ -30,7 +30,7 @@ class error_997_visitor(error_visitor.error_visitor):
     """
     Visit an error_handler composite.  Generate a 997.
     """
-    def __init__(self, fd, term=('~', '*', '~', '\n')):
+    def __init__(self, fd, term=('~', '*', '~', '')):
         """
         @param fd: target file
         @type fd: file descriptor
@@ -45,7 +45,7 @@ class error_997_visitor(error_visitor.error_visitor):
         #self.ele_term = term[1]
         #self.subele_term = term[2]
         #self.eol = term[3]
-        self.eol = '\n'
+        self.eol = ''
         self.seg_count = 0
         self.isa_control_num = None
         self.isa_seg = None
@@ -402,5 +402,5 @@ class error_997_visitor(error_visitor.error_visitor):
         if seg_data.get_seg_id() == 'ISA':
             sout = sout[:-1] + self.ele_term + self.subele_term \
                 + self.seg_term
-        self.fd.write('%s\n' % (sout))
+        self.fd.write('%s' % (sout))
         self.seg_count += 1

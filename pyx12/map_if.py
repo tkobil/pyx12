@@ -279,7 +279,7 @@ class map_if(x12_node):
         """
         @rtype: string
         """
-        return '%s\n' % (self.id)
+        return '%s' % (self.id)
 
     def _path_parent(self):
         """
@@ -464,7 +464,7 @@ class loop_if(x12_node):
             out += '  pos: %s' % (self.pos)
         if self.repeat:
             out += '  repeat: %s' % (self.repeat)
-        out += '\n'
+        out += ''
         return out
 
     def get_max_repeat(self):
@@ -756,7 +756,7 @@ class segment_if(x12_node):
             out += '  pos: %i' % (self.pos)
         if self.max_use:
             out += '  max_use: %s' % (self.max_use)
-        out += '\n'
+        out += ''
         return out
 
     def get_child_node_by_idx(self, idx):
@@ -1147,7 +1147,7 @@ class element_if(x12_node):
             'min_len'], data_ele['max_len'])
         if self.external_codes:
             out += '   external codes: %s' % (self.external_codes)
-        out += '\n'
+        out += ''
         return out
 
 #    def __del__(self):
@@ -1434,8 +1434,8 @@ class composite_if(x12_node):
         """
         Forward the error to an error_handler
         """
-        err_str2 = err_str.replace('\n', '').replace('\r', '')
-        elem_val2 = elem_val.replace('\n', '').replace('\r', '')
+        err_str2 = err_str.replace('', '').replace('\r', '')
+        elem_val2 = elem_val.replace('', '').replace('\r', '')
         errh.ele_error(err_cde, err_str2, elem_val2, self.refdes)
             #, pos=self.seq, data_ele=self.data_ele)
 
@@ -1455,17 +1455,17 @@ class composite_if(x12_node):
             out += '  seq %i' % (self.seq)
         if self.refdes:
             out += '  refdes %s' % (self.refdes)
-        out += '\n'
+        out += ''
         return out
 
     def xml(self):
         """
         Sends an xml representation of the composite to stdout
         """
-        sys.stdout.write('<composite>\n')
+        sys.stdout.write('<composite>')
         for sub_elem in self.children:
             sub_elem.xml()
-        sys.stdout.write('</composite>\n')
+        sys.stdout.write('</composite>')
 
     def is_valid(self, comp_data, errh):
         """

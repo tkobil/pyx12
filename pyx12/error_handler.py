@@ -78,7 +78,7 @@ class err_handler(object):
     """
     The interface to the error handling structures.
     """
-    def __init__(self):
+    def __init__(self, errhandler):
         """
         """
 
@@ -93,6 +93,16 @@ class err_handler(object):
         self.seg_node_added = False
         self.cur_ele_node = None
         self.cur_line = 0
+        self.errhandler = errhandler
+        self.err_cnt = 0
+    
+    def add_summary(self, element_count):
+        """
+        Params:     element_count - reference to how many elements written in json output
+        """
+        sout = "Data Elements Written: {}".format(element_count)
+        sout += "Number of Errors Found: {}".format(self.err_cnt)
+        self.errhandler.write(sout)
 
     def accept(self, visitor):
         """
@@ -228,6 +238,8 @@ class err_handler(object):
         sout = ''
         sout += 'Line:%i ' % (self.cur_isa_node.get_cur_line())
         sout += 'ISA:%s - %s' % (err_cde, err_str)
+        self.errhandler.write(sout)
+        self.err_cnt += 1
         logger.error(sout)
         self.cur_isa_node.add_error(err_cde, err_str)
 
@@ -241,6 +253,8 @@ class err_handler(object):
         sout = ''
         sout += 'Line:%i ' % (self.cur_gs_node.get_cur_line())
         sout += 'GS:%s - %s' % (err_cde, err_str)
+        self.errhandler.write(sout)
+        self.err_cnt += 1
         logger.error(sout)
         self.cur_gs_node.add_error(err_cde, err_str)
 
@@ -254,6 +268,8 @@ class err_handler(object):
         sout = ''
         sout += 'Line:%i ' % (self.cur_st_node.get_cur_line())
         sout += 'ST:%s - %s' % (err_cde, err_str)
+        self.errhandler.write(sout)
+        self.err_cnt += 1
         logger.error(sout)
         self.cur_st_node.add_error(err_cde, err_str)
 
@@ -278,6 +294,9 @@ class err_handler(object):
         sout += 'SEG:%s - %s' % (err_cde, err_str)
         if err_value:
             sout += ' (%s)' % err_value
+        sout += ''
+        self.errhandler.write(sout)
+        self.err_cnt += 1
         logger.error(sout)
 
     def ele_error(self, err_cde, err_str, bad_value, refdes=None):
@@ -295,6 +314,9 @@ class err_handler(object):
         sout += 'ELE:%s - %s' % (err_cde, err_str)
         if bad_value:
             sout += ' (%s)' % (bad_value)
+        sout += ''
+        self.errhandler.write(sout)
+        self.err_cnt += 1
         logger.error(sout)
         #print self.cur_ele_node.errors
 

@@ -34,13 +34,13 @@ class X12fileTestCase(unittest.TestCase):
 class Delimiters(X12fileTestCase):
 
     def test_arbitrary_delimiters(self):
-        str1 = 'ISA&00&          &00&          &ZZ&ZZ000          &ZZ&ZZ001          &030828&1128&U&00401&000010121&0&T&!+\n'
-        str1 += 'GS&HC&ZZ000&ZZ001&20030828&1128&17&X&004010X098A1+\n'
-        str1 += 'ST&837&11280001+\n'
-        str1 += 'REF&87&004010X098A1+\n'
-        str1 += 'SE&3&11280001+\n'
-        str1 += 'GE&1&17+\n'
-        str1 += 'IEA&1&000010121+\n'
+        str1 = 'ISA&00&          &00&          &ZZ&ZZ000          &ZZ&ZZ001          &030828&1128&U&00401&000010121&0&T&!+'
+        str1 += 'GS&HC&ZZ000&ZZ001&20030828&1128&17&X&004010X098A1+'
+        str1 += 'ST&837&11280001+'
+        str1 += 'REF&87&004010X098A1+'
+        str1 += 'SE&3&11280001+'
+        str1 += 'GE&1&17+'
+        str1 += 'IEA&1&000010121+'
         fd = self._makeFd(str1)
         errh = pyx12.error_handler.errh_null()
         src = pyx12.x12context.X12ContextReader(self.param, errh, fd)
@@ -51,13 +51,13 @@ class Delimiters(X12fileTestCase):
         self.assertEqual(src.seg_term, '+')
 
     def test_binary_delimiters(self):
-        str1 = 'ISA&00&          &00&          &ZZ&ZZ000          &ZZ&ZZ001          &030828&1128&U&00401&000010121&0&T&!+\n'
-        str1 += 'GS&HC&ZZ000&ZZ001&20030828&1128&17&X&004010X098A1+\n'
-        str1 += 'ST&837&11280001+\n'
-        str1 += 'REF&87&004010X098A1+\n'
-        str1 += 'SE&3&11280001+\n'
-        str1 += 'GE&1&17+\n'
-        str1 += 'IEA&1&000010121+\n'
+        str1 = 'ISA&00&          &00&          &ZZ&ZZ000          &ZZ&ZZ001          &030828&1128&U&00401&000010121&0&T&!+'
+        str1 += 'GS&HC&ZZ000&ZZ001&20030828&1128&17&X&004010X098A1+'
+        str1 += 'ST&837&11280001+'
+        str1 += 'REF&87&004010X098A1+'
+        str1 += 'SE&3&11280001+'
+        str1 += 'GE&1&17+'
+        str1 += 'IEA&1&000010121+'
         str1 = str1.replace('&', chr(0x1C))
         str1 = str1.replace('+', chr(0x1D))
         str1 = str1.replace('!', chr(0x1E))
@@ -385,14 +385,14 @@ class TreeAddLoop(X12fileTestCase):
 
 class TreeAddLoopDetail(X12fileTestCase):
     def test_add_loops_under_detail(self):
-        str1 = 'ISA&00&          &00&          &ZZ&ZZ000          &ZZ&ZZ001          &030828&1128&U&00401&000010121&0&T&!+\n'
-        str1 += 'GS&BE&ZZ000&ZZ001&20030828&1128&17&X&004010X095A1+\n'
-        str1 += 'ST&834&11280001+\n'
-        str1 += 'BGN&+\n'
-        str1 += 'INS&Y&18&30&XN&AE&RT+\n'
-        str1 += 'SE&4&11280001+\n'
-        str1 += 'GE&1&17+\n'
-        str1 += 'IEA&1&000010121+\n'
+        str1 = 'ISA&00&          &00&          &ZZ&ZZ000          &ZZ&ZZ001          &030828&1128&U&00401&000010121&0&T&!+'
+        str1 += 'GS&BE&ZZ000&ZZ001&20030828&1128&17&X&004010X095A1+'
+        str1 += 'ST&834&11280001+'
+        str1 += 'BGN&+'
+        str1 += 'INS&Y&18&30&XN&AE&RT+'
+        str1 += 'SE&4&11280001+'
+        str1 += 'GE&1&17+'
+        str1 += 'IEA&1&000010121+'
         fd = self._makeFd(str1)
         errors = []
         param = pyx12.params.params()

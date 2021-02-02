@@ -110,12 +110,12 @@ def scrub2000(loop_sub, deident):
 
 def usage():
     pgm_nme = os.path.basename(sys.argv[0])
-    sys.stdout.write('%s %s (%s)\n' % (pgm_nme, __version__, __date__))
-    sys.stdout.write('usage: %s [options] source_file\n' % (pgm_nme))
-    sys.stdout.write('\noptions:\n')
-    sys.stdout.write('  -h         Help\n')
-    sys.stdout.write('  -d         Debug mode\n')
-    sys.stdout.write('  -o output_directory \n')
+    sys.stdout.write('%s %s (%s)' % (pgm_nme, __version__, __date__))
+    sys.stdout.write('usage: %s [options] source_file' % (pgm_nme))
+    sys.stdout.write('options:')
+    sys.stdout.write('  -h         Help')
+    sys.stdout.write('  -d         Debug mode')
+    sys.stdout.write('  -o output_directory ')
 
 
 def main():

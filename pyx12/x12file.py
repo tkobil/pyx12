@@ -282,7 +282,7 @@ class X12Base(object):
 
         @rtype: tuple(string, string, string, string)
         """
-        return (self.seg_term, self.ele_term, self.subele_term, '\n', self.repetition_term)
+        return (self.seg_term, self.ele_term, self.subele_term, '', self.repetition_term)
 
 
 class X12Reader(X12Base):
@@ -434,7 +434,7 @@ class X12Writer(X12Base):
     X12 file and stream writer
     """
 
-    def __init__(self, src_file_obj, seg_term='~', ele_term='*', subele_term='\\', eol='\n', repetition_term='^'):
+    def __init__(self, src_file_obj, seg_term='~', ele_term='*', subele_term='\\', eol='', repetition_term='^'):
         """
         Initialize the file X12 file writer
 

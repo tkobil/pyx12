@@ -272,7 +272,7 @@ class BadWhitespace(unittest.TestCase):
         self.assertFalse(IsValidDataType(chr(0x09), 'AN', 'E', '00501'))
         self.assertFalse(IsValidDataType(chr(0x11), 'AN', 'E', '00501'))
         self.assertFalse(IsValidDataType('\t', 'AN', 'E', '00501'))
-        self.assertFalse(IsValidDataType('\n', 'AN', 'E', '00501'))
+        self.assertFalse(IsValidDataType('', 'AN', 'E', '00501'))
         self.assertFalse(IsValidDataType('\r', 'AN', 'E', '00501'))
         self.assertFalse(IsValidDataType('\b', 'AN', 'E', '00501'))
         self.assertFalse(IsValidDataType(chr(0x0A), 'AN', 'E', '00501'))

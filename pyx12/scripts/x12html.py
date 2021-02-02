@@ -124,7 +124,7 @@ def main():
             logger.error('Could not open files')
             return False
         except KeyboardInterrupt:
-            print("\n[interrupt]")
+            print("[interrupt]")
     return True
 
 if __name__ == '__main__':

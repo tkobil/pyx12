@@ -89,7 +89,7 @@ def main():
             logger.exception('Could not open files')
             return False
         except KeyboardInterrupt:
-            print("\n[interrupt]")
+            print("[interrupt]")
         except Exception as e:
             raise e
 

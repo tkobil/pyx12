@@ -128,9 +128,9 @@ def main():
                     p.start()
                     if pyx12.x12n_document.x12n_document(param=param, src_file=src_filename,
                             fd_997=fd_997, fd_html=fd_html, fd_xmldoc=None, map_path=args.map_path):
-                        sys.stderr.write('%s: OK\n' % (src_filename))
+                        sys.stderr.write('%s: OK' % (src_filename))
                     else:
-                        sys.stderr.write('%s: Failure\n' % (src_filename))
+                        sys.stderr.write('%s: Failure' % (src_filename))
                     #import profile
                     #prof_str = 'pyx12.x12n_document.x12n_document(param, src_filename, ' \
                     #        + 'fd_997, fd_html, None, None)'
@@ -148,14 +148,14 @@ def main():
                             fdp.write(repr(dict(p.stack_counts)))
                     except Exception:
                         logger.exception('Failed to write profile data')
-                        sys.stderr.write('%s: bad profile save\n' % (src_filename))
+                        sys.stderr.write('%s: bad profile save' % (src_filename))
                 else:
                     logger.debug('Before x12n_document for {}'.format(src_filename))
                     if pyx12.x12n_document.x12n_document(param=param, src_file=src_filename,
                             fd_997=fd_997, fd_html=fd_html, fd_xmldoc=None, map_path=args.map_path):
-                        sys.stderr.write('%s: OK\n' % (src_filename))
+                        sys.stderr.write('%s: OK' % (src_filename))
                     else:
-                        sys.stderr.write('%s: Failure\n' % (src_filename))
+                        sys.stderr.write('%s: Failure' % (src_filename))
                     logger.debug('after x12n_document for {}'.format(src_filename))
                 if flag_997 and fd_997.tell() != 0:
                     fd_997.seek(0)
@@ -174,7 +174,7 @@ def main():
                 logger.exception('Could not open files')
                 return False
             except KeyboardInterrupt:
-                print("\n[interrupt]")
+                print("[interrupt]")
 
     return True
 

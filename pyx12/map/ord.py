@@ -21,8 +21,8 @@ def donode(node):
             if child.pos < oldpos:
                 #if child.is_loop(): sys.stdout.write('LOOP: ')
                 #if child.is_segment(): sys.stdout.write('SEG:  ')
-                sys.stdout.write('%s:\t%s\t%s\n' % (old_type, old_path, oldpos))
-                sys.stdout.write('%s:\t%s\t%s\n\n' % (child.base_name, child.get_path(), child.pos))
+                sys.stdout.write('%s:\t%s\t%s' % (old_type, old_path, oldpos))
+                sys.stdout.write('%s:\t%s\t%s' % (child.base_name, child.get_path(), child.pos))
             else:
                 oldpos = child.pos
                 old_path = child.get_path()

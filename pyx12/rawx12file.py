@@ -68,7 +68,7 @@ class RawX12File(object):
                 break
             # Get first segment in buffer
             (line, self.buffer) = self.buffer.split(self.seg_term, 1)
-            line = line.lstrip('\n\r')
+            line = line.lstrip('\r')
             if line == '':
                 break
             yield(line)
@@ -79,4 +79,4 @@ class RawX12File(object):
 
         @rtype: tuple(string, string, string, string)
         """
-        return (self.seg_term, self.ele_term, self.subele_term, '\n', self.repetition_term)
+        return (self.seg_term, self.ele_term, self.subele_term, '', self.repetition_term)

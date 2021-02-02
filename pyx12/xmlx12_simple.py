@@ -29,7 +29,7 @@ def convert(filename, fd_out):
     @type fd_out: file descripter
     """
     logger = logging.getLogger('pyx12')
-    wr = pyx12.x12file.X12Writer(fd_out, '~', '*', ':', '\n', '^')
+    wr = pyx12.x12file.X12Writer(fd_out, '~', '*', ':', '', '^')
     doc = et.parse(filename)
     for node in doc.iter():
         if node.tag == 'seg':

@@ -17,7 +17,7 @@ class TestWriter(unittest.TestCase):
     """
     """
     def setUp(self):
-        self.res = '<?xml version="1.0" encoding="utf-8"?>\n<x12err>\n</x12err>\n'
+        self.res = '<?xml version="1.0" encoding="utf-8"?><x12err></x12err>'
 
     def test_write1(self):
         try:

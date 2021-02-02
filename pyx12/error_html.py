@@ -25,7 +25,7 @@ logger.setLevel(logging.DEBUG)
 class error_html(object):
     """
     """
-    def __init__(self, errh, fd, term=('~', '*', '~', '\n')):
+    def __init__(self, errh, fd, term=('~', '*', '~', '')):
         """
         @param fd: target file
         @type fd: file descriptor
@@ -44,42 +44,42 @@ class error_html(object):
         self.loop_info = None
 
     def header(self):
-        self.fd.write('<html>\n<head>\n')
-        self.fd.write('<title>X12N Error Analysis</title>\n')
-        self.fd.write('<style type="text/css">\n<!--\n')
-        self.fd.write('  span.seg { color: black; font-style: normal; }\n')
-        self.fd.write('  span.error { background-color: #CCCCFF; color: red; font-style: normal; }\n')
-        self.fd.write('  span.info { color: blue; font-style: normal; }\n')
-        self.fd.write('  span.ele_err { background-color: yellow; color: red; font-style: normal; }\n')
-        self.fd.write('  -->\n</style>\n')
-        self.fd.write('  <link rel="stylesheet" href="errors.css" type="text/css" />\n')
-        self.fd.write('</head>\n<body>\n')
-        self.fd.write('<h1>X12N Error Analysis</h1>\n<h3>Analysis Date: %s</h3><p>\n' %
+        self.fd.write('<html><head>')
+        self.fd.write('<title>X12N Error Analysis</title>')
+        self.fd.write('<style type="text/css"><!--')
+        self.fd.write('  span.seg { color: black; font-style: normal; }')
+        self.fd.write('  span.error { background-color: #CCCCFF; color: red; font-style: normal; }')
+        self.fd.write('  span.info { color: blue; font-style: normal; }')
+        self.fd.write('  span.ele_err { background-color: yellow; color: red; font-style: normal; }')
+        self.fd.write('  --></style>')
+        self.fd.write('  <link rel="stylesheet" href="errors.css" type="text/css" />')
+        self.fd.write('</head><body>')
+        self.fd.write('<h1>X12N Error Analysis</h1><h3>Analysis Date: %s</h3><p>' %
                       (time.strftime('%m/%d/%Y %H:%M:%S')))
-        self.fd.write('<div class="segs" style="">\n')
+        self.fd.write('<div class="segs" style="">')
 
     def footer(self):
         err_st = self.errh.cur_st_node
         if not err_st.is_closed():
             for (err_cde, err_str) in err_st.errors:
                 if err_cde == '2':
-                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />\n' %
+                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />' %
                                   (err_str, err_cde))
         err_gs = self.errh.cur_gs_node
         if not err_gs.is_closed():
             for (err_cde, err_str) in err_gs.errors:
                 if err_cde == '3':
-                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />\n' %
+                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />' %
                                   (err_str, err_cde))
         err_isa = self.errh.cur_isa_node
         if not err_isa.is_closed():
             for (err_cde, err_str) in err_isa.errors:
                 if err_cde == '023':
-                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />\n' %
+                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />' %
                                   (err_str, err_cde))
-        self.fd.write('</div>\n')
-        self.fd.write('<p>\n<a href="http://sourceforge.net/projects/pyx12/">pyx12 Validator</a>\n</p>\n')
-        self.fd.write('</body>\n</html>\n')
+        self.fd.write('</div>')
+        self.fd.write('<p><a href="http://sourceforge.net/projects/pyx12/">pyx12 Validator</a></p>')
+        self.fd.write('</body></html>')
 
     def loop(self, loop_node):
         if loop_node.type != 'wrapper':
@@ -89,7 +89,7 @@ class error_html(object):
     def gen_info(self, info_str):
         """
         """
-        self.fd.write('<span class="info">&nbsp;&nbsp;%s</span><br />\n' %
+        self.fd.write('<span class="info">&nbsp;&nbsp;%s</span><br />' %
                       (info_str))
 
     def gen_seg(self, seg_data, src, err_node_list):
@@ -132,12 +132,12 @@ class error_html(object):
                 err_cde = err_tuple[0]
                 err_str = err_tuple[1]
                 if err_cde == '3':
-                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />\n' %
+                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />' %
                                   (err_str, err_cde))
         if self.loop_info:
             self.gen_info(self.loop_info)
         self.loop_info = None
-        self.fd.write('<span class="seg">%i:&nbsp;%s</span><br />\n' %
+        self.fd.write('<span class="seg">%i:&nbsp;%s</span><br />' %
                       (cur_line, self._seg_str(seg_data.get_seg_id(), t_seg)))
         for err_node in err_node_list:
             for err_tuple in err_node.get_error_list(seg_data.get_seg_id(), False):
@@ -145,13 +145,13 @@ class error_html(object):
                 err_cde = err_tuple[0]
                 err_str = err_tuple[1]
                 if err_cde != '3':
-                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />\n' %
+                    self.fd.write('<span class="error">&nbsp;%s (Segment Error Code: %s)</span><br />' %
                                   (err_str, err_cde))
             for ele in err_node.elements:
                 for (err_cde, err_str, err_val) in ele.get_error_list(seg_data.get_seg_id(), False):
                 #for (err_cde, err_str, err_val) in ele.errors:
                     if not (seg_data.get_seg_id() == 'GE' and 'GS' in err_str):  # Ugly hack
-                        self.fd.write('<span class="error">&nbsp;%s (Element Error Code: %s)</span><br />\n' %
+                        self.fd.write('<span class="error">&nbsp;%s (Element Error Code: %s)</span><br />' %
                                       (err_str, err_cde))
 
     def _seg_str(self, seg_id, ele_list):

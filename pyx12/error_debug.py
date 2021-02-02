@@ -35,7 +35,7 @@ class error_debug_visitor(error_visitor):
         @param errh: Error_handler instance
         @type errh: L{error_handler.err_handler}
         """
-        self.fd.write('%s\n' % errh.id)
+        self.fd.write('%s' % errh.id)
 
     def visit_root_post(self, errh):
         """
@@ -49,15 +49,15 @@ class error_debug_visitor(error_visitor):
         @param err_isa: ISA Loop error handler
         @type err_isa: L{error_handler.err_isa}
         """
-        self.fd.write('%s\n' % err_isa.id)
-        self.fd.write('-- ISA errors --\n')
+        self.fd.write('%s' % err_isa.id)
+        self.fd.write('-- ISA errors --')
         for err in err_isa.errors:
-            self.fd.write('  %s %s\n' % err)
+            self.fd.write('  %s %s' % err)
         for ele in err_isa.elements:
-            self.fd.write('  %s %s\n' % (ele.id, ele.name))
+            self.fd.write('  %s %s' % (ele.id, ele.name))
             print((ele.parent))
             for err in ele.errors:
-                self.fd.write('    ERR %s %s (%s)\n' % err)
+                self.fd.write('    ERR %s %s (%s)' % err)
 
     def visit_isa_post(self, err_isa):
         """
@@ -71,14 +71,14 @@ class error_debug_visitor(error_visitor):
         @param err_gs: GS Loop error handler
         @type err_gs: L{error_handler.err_gs}
         """
-        self.fd.write('%s\n' % err_gs.id)
-        self.fd.write('-- GS errors --\n')
+        self.fd.write('%s' % err_gs.id)
+        self.fd.write('-- GS errors --')
         for err in err_gs.errors:
-            self.fd.write('  %s %s\n' % err)
+            self.fd.write('  %s %s' % err)
         for ele in err_gs.elements:
-            self.fd.write('  %s %s\n' % (ele.id, ele.name))
+            self.fd.write('  %s %s' % (ele.id, ele.name))
             for err in ele.errors:
-                self.fd.write('    ERR %s %s (%s)\n' % err)
+                self.fd.write('    ERR %s %s (%s)' % err)
 
     def visit_gs_post(self, err_gs):
         """
@@ -86,14 +86,14 @@ class error_debug_visitor(error_visitor):
         @type err_gs: L{error_handler.err_gs}
         """
 
-        self.fd.write('%s POST\n' % err_gs.id)
+        self.fd.write('%s POST' % err_gs.id)
         #AK9
         #seg = ['AK9', err_gs.ack_code, '%i' % err_gs.st_count_orig, \
         #    '%i' % err_gs.st_count_recv, '%i' % (err_gs.st_count_recv - err_gs.count_failed_st())]
-        self.fd.write(' GS Ack Code%s\n' % err_gs.ack_code)
-        self.fd.write(' GS st_count_orig%s\n' % err_gs.st_count_orig)
-        self.fd.write(' GS st_count_recv%i\n' % err_gs.st_count_recv)
-        self.fd.write(' GS st_count_accept%i\n' % (
+        self.fd.write(' GS Ack Code%s' % err_gs.ack_code)
+        self.fd.write(' GS st_count_orig%s' % err_gs.st_count_orig)
+        self.fd.write(' GS st_count_recv%i' % err_gs.st_count_recv)
+        self.fd.write(' GS st_count_accept%i' % (
             err_gs.st_count_recv - err_gs.count_failed_st()))
 
     def visit_st_pre(self, err_st):
@@ -101,14 +101,14 @@ class error_debug_visitor(error_visitor):
         @param err_st: ST Loop error handler
         @type err_st: L{error_handler.err_st}
         """
-        self.fd.write('%s\n' % err_st.id)
-        self.fd.write('-- ST errors --\n')
+        self.fd.write('%s' % err_st.id)
+        self.fd.write('-- ST errors --')
         for err in err_st.errors:
-            self.fd.write('  ERR %s %s\n' % err)
+            self.fd.write('  ERR %s %s' % err)
         for ele in err_st.elements:
-            self.fd.write('  ST Element:  %s %s\n' % (ele.id, ele.name))
+            self.fd.write('  ST Element:  %s %s' % (ele.id, ele.name))
             for err in ele.errors:
-                self.fd.write('    ERR %s %s (%s)\n' % err)
+                self.fd.write('    ERR %s %s (%s)' % err)
 
     def visit_st_post(self, err_st):
         """
@@ -123,13 +123,13 @@ class error_debug_visitor(error_visitor):
         @type err_seg: L{error_handler.err_seg}
         """
         #pdb.set_trace()
-        self.fd.write('%s %s %s %s\n' % (err_seg.id, err_seg.name,
+        self.fd.write('%s %s %s %s' % (err_seg.id, err_seg.name,
                                          err_seg.get_cur_line(), err_seg.seg_id))
         for (err_cde, err_str, err_value) in err_seg.errors:
-            self.fd.write('  ERR %s (%s) "%s" \n' % (err_cde,
+            self.fd.write('  ERR %s (%s) "%s" ' % (err_cde,
                                                      err_value, err_str))
         #for ele in err_seg.elements:
-        #    self.fd.write('  %s %s\n' % (ele.id, ele.name))
+        #    self.fd.write('  %s %s' % (ele.id, ele.name))
 
     def visit_ele(self, err_ele):
         """
@@ -137,6 +137,6 @@ class error_debug_visitor(error_visitor):
         @param err_ele: Element error handler
         @type err_ele: L{error_handler.err_ele}
         """
-        self.fd.write('  %s %s\n' % (err_ele.id, err_ele.name))
+        self.fd.write('  %s %s' % (err_ele.id, err_ele.name))
         for err in err_ele.errors:
-            self.fd.write('    ERR %s %s (%s)\n' % err)
+            self.fd.write('    ERR %s %s (%s)' % err)
