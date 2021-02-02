@@ -23,7 +23,6 @@ logger = logging.getLogger('pyx12.error_handler')
 class err_iter(object):
     """
     Iterate over the error tree
-
     Implements an odd iterator???
     """
 

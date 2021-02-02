@@ -229,7 +229,7 @@ def x12n_document(param, src_file, fd_997, fd_html,
             fd_jsondoc.seg(node, seg)
 
         if False:
-            print('')
+            print('\n\n')
         #erx.Write(src.cur_line)
     
     #erx.handleErrors(src.pop_errors())
